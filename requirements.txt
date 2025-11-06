@@ -1,0 +1,21 @@
+# Core Dependencies
+PyGithub==2.1.1          # GitHub API client for repository scanning
+ollama==0.4.7            # Ollama API client for AI content generation
+requests==2.31.0         # HTTP library for API calls
+
+# Content Processing
+python-frontmatter==1.0.1  # Parse markdown frontmatter
+markdown==3.5              # Markdown parsing and manipulation
+
+# Configuration & Environment
+python-dotenv==1.0.0     # Environment variable management
+pyyaml==6.0.1            # YAML configuration file support
+
+# Utilities
+loguru==0.7.2            # Enhanced logging
+tenacity==8.2.3          # Retry logic for API calls
+typer==0.9.0             # CLI framework
+rich==13.7.0             # Rich terminal output
+
+# Data Validation
+pydantic>=2.9.0          # Data validation and settings management (required by ollama)

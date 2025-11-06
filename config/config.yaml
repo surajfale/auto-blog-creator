@@ -1,0 +1,106 @@
+# Auto-Blog-Creator Configuration
+
+# Content Generation Settings
+content:
+  tone: "professional but witty"
+  style: "informative and engaging"
+  target_length: 1500  # Target word count for generated posts
+
+  # Prompt template for content generation
+  prompt_template: |
+    You are a technical writer creating a blog post about a GitHub project.
+
+    Project Information:
+    {project_info}
+
+    Instructions:
+    - Write in a {tone} tone
+    - Target length: approximately {target_length} words
+    - Focus on the project's CORE STRENGTHS and KEY FEATURES
+    - Explain the problem the project solves and its unique value proposition
+    - If the project uses AI/LLMs: Deep dive into the AI implementation and prompt engineering strategies
+    - Showcase technical architecture and design decisions
+    - Include code examples that demonstrate capabilities (not setup)
+    - DO NOT focus on setup/installation steps - direct readers to README.md for that
+    - Write for developers interested in technical implementation and capabilities
+
+    Generate a comprehensive, engaging blog post that showcases technical excellence.
+
+# Platform-specific Formatting
+platforms:
+  devto:
+    # Include dev.to specific frontmatter
+    include_frontmatter: true
+    default_tags:
+      - "opensource"
+      - "github"
+    max_tags: 4
+
+  medium:
+    # Medium-specific formatting preferences
+    include_subtitle: true
+    use_large_headers: true
+
+# GitHub Scanner Settings
+github:
+  # File patterns to include when scanning
+  include_patterns:
+    - "*.md"
+    - "README*"
+    - "CONTRIBUTING*"
+    - "docs/*.md"
+
+  # File patterns to exclude
+  exclude_patterns:
+    - "node_modules/*"
+    - ".git/*"
+    - "vendor/*"
+    - "build/*"
+    - "dist/*"
+
+  # Maximum file size to read (in bytes)
+  max_file_size: 1048576  # 1MB
+
+  # Priority files (will be processed first)
+  priority_files:
+    - "README.md"
+    - "README.MD"
+    - "readme.md"
+
+# File Manager Settings
+output:
+  # Directory for generated content
+  directory: "generated_content"
+
+  # Filename template
+  # Available variables: {repo_name}, {platform}, {timestamp}
+  filename_template: "{repo_name}_{platform}_{timestamp}.md"
+
+  # Timestamp format
+  timestamp_format: "%Y%m%d_%H%M%S"
+
+# API Settings
+api:
+  # Retry settings for API calls
+  max_retries: 3
+  retry_delay: 2  # seconds
+
+  # Request timeout (seconds)
+  timeout: 60
+
+  # Dev.to specific settings
+  devto:
+    base_url: "https://dev.to/api"
+    rate_limit_delay: 3  # seconds between requests
+
+# Attribution Settings
+attribution:
+  # Repository URL for Auto-Blog-Creator (update with your actual repo URL)
+  repo_url: "https://github.com/surajfale/auto-blog-creator"
+  enabled: true  # Set to false to disable attribution footer
+
+# Logging Settings
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan> - <level>{message}</level>"
+  file: "auto_blog_creator.log"
