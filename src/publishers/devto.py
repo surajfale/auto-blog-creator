@@ -117,7 +117,22 @@ class DevToPublisher:
 
         except requests.exceptions.HTTPError as e:
             logger.error(f"HTTP error creating article: {e}")
-            logger.error(f"Response: {e.response.text if e.response else 'N/A'}")
+
+            # Get detailed error information
+            if e.response is not None:
+                try:
+                    error_json = e.response.json()
+                    logger.error(f"API Error Response: {error_json}")
+                except Exception:
+                    # If JSON parsing fails, log raw text
+                    logger.error(f"API Response Text: {e.response.text}")
+
+                # Log request payload for debugging
+                if e.response.status_code == 422:
+                    logger.error(f"Article data sent: {article_data}")
+            else:
+                logger.error("No response object available")
+
             raise
 
         except requests.exceptions.RequestException as e:
